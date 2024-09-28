@@ -1,7 +1,7 @@
 {
     "menu.title": {
-        "en": "Knives Menu",
-        "ro": "Meniu Cuțite"
+        "en": "Skins Menu",
+        "ro": "Meniu Skin-uri"
     },
     "menu.equipfor": {
         "en": "Equip for",
@@ -66,5 +66,9 @@
     "none": {
         "en": "none",
         "ro": "nimic"
+    },
+    "refreshed": {
+        "en": "Your skins have been successfully refreshed.",
+        "ro": "Skin-urile tale au fost reimprospatate cu success."
     }
 }
