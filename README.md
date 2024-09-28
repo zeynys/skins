@@ -12,6 +12,19 @@
 
 1. Download the newest [release](https://github.com/zeynys/skins/releases).
 2. Perform a drag-and-drop installation.
+3. Configure database connection like this:
+
+```json
+{
+  "skins": {
+    "hostname": "...",
+    "username": "...",
+    "password": "...",
+    "database": "...",
+    "port": 3306
+  }
+}
+```
 
 ### Configuring the plugin
 
