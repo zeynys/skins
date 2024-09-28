@@ -1,0 +1,70 @@
+{
+    "menu.title": {
+        "en": "Knives Menu",
+        "ro": "Meniu Cuțite"
+    },
+    "menu.equipfor": {
+        "en": "Equip for",
+        "ro": "Echipează pentru"
+    },
+    "menu.equip": {
+        "en": "Equip",
+        "ro": "Echipează"
+    },
+    "menu.ct": {
+        "en": "Counter-Terrorist",
+        "ro": "Contra-Teroriști"
+    },
+    "menu.t": {
+        "en": "Terrorist",
+        "ro": "Terorist"
+    },
+    "equip": {
+        "en": "You've succesfully equipped {green}{NAME}{default} for {green}{TEAM}{default}.",
+        "ro": "Ai echipat cu succes {green}{NAME}{default} pentru {green}{TEAM}{default}."
+    },
+    "unequip": {
+        "en": "You've succesfully unequipped {green}{NAME}{default} for {green}{TEAM}{default}.",
+        "ro": "Ai dezechipat cu succes {green}{NAME}{default} pentru {green}{TEAM}{default}."
+    },
+    "menu.setseed": {
+        "en": "Set Seed",
+        "ro": "Setează Seed"
+    },
+    "menu.setwear": {
+        "en": "Set Wear",
+        "ro": "Setează Wear"
+    },
+    "menu.setnametag": {
+        "en": "Set Nametag",
+        "ro": "Setează Nametag"
+    },
+    "menu.random": {
+        "en": "Random",
+        "ro": "Aleatoriu"
+    },
+    "menu.manual": {
+        "en": "Manual",
+        "ro": "Manual"
+    },
+    "update": {
+        "en": "You've succesfully updated the {green}{CATEGORY}{default} to {green}{VALUE}{default}.",
+        "ro": "Ai actualizat cu succes {green}{CATEGORY}-ul{default} în {green}{VALUE}{default}."
+    },
+    "type_in_chat": {
+        "en": "Please type in chat the value for <font color='#{COLOR}'>{CATEGORY}</font> ({LIMIT})",
+        "ro": "Te rugăm să scrii în chat valoarea pentru <font color='#{COLOR}'>{CATEGORY}</font> ({LIMIT})"
+    },
+    "invalid": {
+        "en": "Invalid {CATEGORY} value. Limit: {LIMIT}",
+        "ro": "Valoarea pentru {CATEGORY} este invalidă. Limită: {LIMIT}"
+    },
+    "clear": {
+        "en": "Type 'clear' to remove the nametag.",
+        "ro": "Scrie 'clear' pentru a șterge nametag-ul."
+    },
+    "none": {
+        "en": "none",
+        "ro": "nimic"
+    }
+}
