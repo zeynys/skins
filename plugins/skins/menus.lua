@@ -45,9 +45,6 @@ commands:Register("selectcategory_skin", function(playerid, args, argc, silent, 
     local menuid = "select_skin_menu_" .. os.time()
     menus:RegisterTemporary(menuid, weaponCategory, config:Fetch("skins.color"), menuOptions)
 
-    print(menuid)
-    print(weaponCategory)
-    print(menuOptions)
 
     player:HideMenu()
     player:ShowMenu(menuid)
@@ -70,10 +67,6 @@ commands:Register("selectskin", function(playerid, args, argc, silent, prefix)
         { FetchTranslation("skins.menu.setnametag"), "sw_skin_setnametag \"" .. skinid .. "\" menu" },
         { FetchTranslation("core.menu.back"),        "sw_selectcategory_skin \"" .. SkinsWeaponIdx[skinid].name:split("|")[1]:trim() .. "\"" }
     })
-
-    print(skinid)
-    print(menuid)
-    print(SkinsWeaponIdx[skinid].name)
 
     player:HideMenu()
     player:ShowMenu(menuid)
