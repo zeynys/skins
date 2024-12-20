@@ -3,8 +3,7 @@ function LoadSkinsPlayerData(player)
     if player:IsFakeClient() then return end
     if not db:IsConnected() then return end
 
-    db:QueryParams("select * from skins where steamid = '@steamid' limit 1", { steamid = player:GetSteamID() },
-        function(err, result)
+    db:QueryBuilder():Table("skins"):Select({}):Where("steamid", "=", tostring(player:GetSteamID())):Limit(1):Execute(function (err, result)
             if #err > 0 then
                 return print("ERROR: " .. err)
             end
@@ -13,6 +12,20 @@ function LoadSkinsPlayerData(player)
                 player:SetVar("skins.t", "[]")
                 player:SetVar("skins.ct", "[]")
                 player:SetVar("skins.data", "{}")
+
+                local params = {
+                    steamid = tostring(player:GetSteamID()),
+                    t = "[]",
+                    ct = "[]",
+                    skins_data = "{}"
+                }
+
+                db:QueryBuilder():Table("skins"):Insert(params):OnDuplicate(params):Execute(function (err, result)
+                    if #err > 0 then
+                        print("ERROR: " .. err)
+                    end
+                end)
+
             else
                 player:SetVar("skins.t", result[1].t)
                 player:SetVar("skins.ct", result[1].ct)
@@ -66,24 +79,15 @@ function UpdatePlayerSkins(player, team, skinidx)
 
     player:SetVar("skins." .. team, json.encode(skinsData))
 
-    local params = {
-        steamid = player:GetSteamID(),
-        t = "[]",
-        ct = "[]",
-    }
-
-    db:QueryParams(
-        "insert ignore into skins (steamid, t, ct, skins_data) values ('@steamid', '@t', '@ct', '{}')",
-        params
-    )
-
     params = {
-        steamid = player:GetSteamID(),
-        team = team,
-        data = json.encode(skinsData)
+        [team] = skinsData,
     }
 
-    db:QueryParams("update skins set `@team` = '@data' where `steamid` = '@steamid' limit 1", params)
+    db:QueryBuilder():Table("skins"):Update(params):Where("steamid", "=", tostring(player:GetSteamID())):Limit(1):Execute(function (err, result)
+        if #err > 0 then
+            print("ERROR: " .. err)
+        end
+    end)
 end
 
 --- @param player Player
@@ -114,13 +118,11 @@ function UpdatePlayerSkinsData(player, skinidx, field, value)
 
     player:SetVar("skins.data", json.encode(skinsData))
 
-    db:QueryParams(
-        "insert ignore into skins (steamid, t, ct, skins_data) values ('@steamid', '[]', '[]', '{}')",
-        { steamid = player:GetSteamID() }
-    )
-
-    db:QueryParams("update skins set skins_data = '@skinsdata' where steamid = '@steamid' limit 1",
-        { skinsdata = json.encode(skinsData), steamid = player:GetSteamID() })
+    db:QueryBuilder():Table("skins"):Update({skins_data = json.encode(skinsData)}):Where("steamid", "=", tostring(player:GetSteamID())):Limit(1):Execute(function (err, result)
+        if #err > 0 then
+            print("Error: " .. err)
+        end
+    end)
 end
 
 --- @param ptr string
