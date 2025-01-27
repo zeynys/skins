@@ -125,22 +125,6 @@ function UpdatePlayerSkinsData(player, skinidx, field, value)
     end)
 end
 
---- @param ptr string
---- @return Player|nil
-function FindPlayerByPointer(ptr)
-    for i = 1, playermanager:GetPlayerCap() do
-        local player = GetPlayer(i - 1)
-        if player then
-            if not player:IsFakeClient() then
-                if player:CBaseEntity():ToPtr() == ptr then
-                    return player
-                end
-            end
-        end
-    end
-    return nil
-end
-
 --- @param weaponfw Weapon
 --- @param weapon CBasePlayerWeapon
 --- @param paint_index number
@@ -177,6 +161,7 @@ function UpdateSkinsOnSlot(player, slot)
 
     local weapons = player:GetWeaponManager():GetWeapons()
     if not player:CBasePlayerPawn():IsValid() then return end
+    if player:CBaseEntity().LifeState ~= LifeState_t.LIFE_ALIVE then return end
     local activeWeaponIdx = player:CBasePlayerPawn().WeaponServices.ActiveWeapon.Parent.AttributeManager.Item.ItemDefinitionIndex
 
     for i = 1, #weapons do

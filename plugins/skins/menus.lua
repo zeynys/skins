@@ -45,7 +45,6 @@ commands:Register("selectcategory_skin", function(playerid, args, argc, silent, 
     local menuid = "select_skin_menu_" .. os.time()
     menus:RegisterTemporary(menuid, weaponCategory, config:Fetch("skins.color"), menuOptions)
 
-
     player:HideMenu()
     player:ShowMenu(menuid)
 end)

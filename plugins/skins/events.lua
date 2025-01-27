@@ -4,15 +4,14 @@ AddEventHandler("OnPluginStart", function(event)
 
     db:QueryBuilder():Table("skins"):Create({
         steamid = "string|max:128|unique",
-        t = "string|max:128|unique",
-        ct = "string|max:128|unique",
+        t = "string|max:128",
+        ct = "string|max:128",
         skins_data = "json|default:{}"
     }):Execute(function (err, result)
         if #err > 0 then
             print("ERROR: " .. err)
         end
     end)
-
 
     local jsonData = json.decode(files:Read(GetPluginPath(GetCurrentPluginName()) .. "/data/skins.json"))
     if not jsonData then return end
@@ -94,8 +93,12 @@ AddEventHandler("OnEntityCreated", function(event, entityptr)
 
     if designername ~= "weapon_knife" and designername:find("weapon") then
         NextTick(function()
+            local ownerentity = CBaseEntity(entityptr).OwnerEntity
+            if not ownerentity:IsValid() then return end
+            local originalcontroller = CCSPlayerPawnBase(ownerentity:ToPtr()).OriginalController
+            if not originalcontroller:IsValid() then return end
             --- @type Player|nil
-            local player = FindPlayerByPointer(CBaseEntity(entityptr).OwnerEntity:ToPtr())
+            local player = GetPlayer(originalcontroller.Parent:EntityIndex() - 1)
             if not player then return end
             if player:IsFakeClient() then return end
             if not player:CBaseEntity():IsValid() then return end
@@ -118,7 +121,7 @@ AddEventHandler("OnEntityCreated", function(event, entityptr)
                         for j = 1, #weapons do
                             --- @type Weapon
                             local weapon = weapons[j]
-                            if weapon:CBasePlayerWeapon():ToPtr() == entityptr then
+                            if weapon:CBasePlayerWeapon():ToPtr() == entityptr:ToPtr() then
                                 GiveWeaponSkin(weapon, CBasePlayerWeapon(entityptr), paint_index, seed, wear, nametag)
                             end
                         end
