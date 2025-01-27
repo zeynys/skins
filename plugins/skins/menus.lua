@@ -14,7 +14,7 @@ commands:Register("skins", function(playerid, args, argc, silent, prefix)
         end
     end
 
-    local menuid = "skin_menu_" .. os.time()
+    local menuid = "skin_menu_" .. uuid()
     menus:RegisterTemporary(menuid, FetchTranslation("skins.menu.title"),
         config:Fetch("skins.color"), menuOptions)
 
@@ -42,7 +42,7 @@ commands:Register("selectcategory_skin", function(playerid, args, argc, silent, 
         end
     end
 
-    local menuid = "select_skin_menu_" .. os.time()
+    local menuid = "select_skin_menu_" .. uuid()
     menus:RegisterTemporary(menuid, weaponCategory, config:Fetch("skins.color"), menuOptions)
 
     player:HideMenu()
@@ -58,7 +58,7 @@ commands:Register("selectskin", function(playerid, args, argc, silent, prefix)
     local skinid = args[1]
     if not SkinsWeaponIdx[skinid] then return end
 
-    local menuid = "select_skin_menu_" .. os.time()
+    local menuid = "select_skin_menu_" .. uuid()
     menus:RegisterTemporary(menuid, SkinsWeaponIdx[skinid].name, config:Fetch("skins.color"), {
         { FetchTranslation("skins.menu.equipfor"),   "sw_skin_equipfor \"" .. skinid .. "\"" },
         { FetchTranslation("skins.menu.setseed"),    "sw_skin_setseedfor \"" .. skinid .. "\"" },
@@ -82,7 +82,7 @@ commands:Register("skin_equipfor", function(playerid, args, argc, silent, prefix
 
     local data = GetPlayerSkins(player)
 
-    local menuid = "equipfor_skin_menu_" .. os.time()
+    local menuid = "equipfor_skin_menu_" .. uuid()
 
     menus:RegisterTemporary(menuid, SkinsWeaponIdx[skinid].name .. " - " .. FetchTranslation("skins.menu.equip"),
         config:Fetch("skins.color"), {
@@ -127,7 +127,7 @@ commands:Register("skin_setseedfor", function(playerid, args, argc, silent, pref
     local skinid = args[1]
     if not SkinsWeaponIdx[skinid] then return end
 
-    local menuid = "select_seed_menu_" .. os.time()
+    local menuid = "select_seed_menu_" .. uuid()
     menus:RegisterTemporary(menuid, SkinsWeaponIdx[skinid].name, config:Fetch("skins.color"), {
         { FetchTranslation("skins.menu.random"), "sw_skin_setseed \"" .. skinid .. "\" random" },
         { FetchTranslation("skins.menu.manual"), "sw_skin_setseed \"" .. skinid .. "\" manual" },
@@ -206,7 +206,7 @@ commands:Register("skin_setwearfor", function(playerid, args, argc, silent, pref
     local skinid = args[1]
     if not SkinsWeaponIdx[skinid] then return end
 
-    local menuid = "select_seed_menu_" .. os.time()
+    local menuid = "select_seed_menu_" .. uuid()
     menus:RegisterTemporary(menuid, SkinsWeaponIdx[skinid].name, config:Fetch("skins.color"), {
         { "Factory New",                         "sw_skin_setwear \"" .. skinid .. "\" manual 0.0" },
         { "Minimal Wear",                        "sw_skin_setwear \"" .. skinid .. "\" manual 0.08" },
